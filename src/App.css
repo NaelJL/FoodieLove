@@ -1,0 +1,83 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@font-face {
+    font-family: 'Darling';
+    src: url('./assets/Darling.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100%;
+    font-size: clamp(15px, 1.7vw, 17px);
+    background-color: #2D231F;
+}
+header {
+    background-image: url('./assets/dana-devolk-JBqC2n_0zHM-unsplash.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: sticky;
+}
+h1 {
+    font-family: 'Darling';
+    text-align: center;
+    font-size: clamp(50px, 12vw, 120px);
+    margin: clamp(30px, 5vw, 50px) 0px;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+h3 {
+    font-family: 'Ms Madi', cursive;
+    font-size: clamp(28px, 3.5vw, 35px);
+    margin: 20px auto 30px auto;
+}
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 15px;
+    padding: 30px 20px 10px 20px;
+}
+
+/* Loading Spinner __________________________________________________________________________________ */
+.loader {
+    display: block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 7px solid transparent;
+    border-top-color: rgb(213, 125, 17);
+    animation: spin 2s linear infinite;
+}
+.loader::before, .loader::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 7px solid transparent;
+}
+.loader::before {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-top-color: rgb(213, 92, 17);
+    animation: spin 3s linear infinite;
+}
+.loader::after {
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    border-top-color: rgb(213, 40, 17);
+    animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
