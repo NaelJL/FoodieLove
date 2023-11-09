@@ -24,7 +24,7 @@ export default function RecipeCard({ id, title, image, usedIngredients = "", mis
             <p className='text-left'>{missedIngredients}</p>
             <button 
                 onClick={handleButtonClick}
-                className="text-white bg-orange-700 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
+                className="text-white bg-orange-950 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
                 Show the recipe
             </button>
         </article>

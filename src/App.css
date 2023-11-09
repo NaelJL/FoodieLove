@@ -13,7 +13,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     min-height: 100%;
     font-size: clamp(15px, 1.7vw, 17px);
-    background-color: #2D231F;
+    background-color: #c9c8c8;
 }
 header {
     background-image: url('./assets/dana-devolk-JBqC2n_0zHM-unsplash.jpg');
@@ -26,13 +26,13 @@ h1 {
     font-family: 'Darling';
     text-align: center;
     font-size: clamp(50px, 12vw, 120px);
-    margin: clamp(30px, 5vw, 50px) 0px;
+    margin: 0px;
     color: white;
     text-shadow: 2px 2px black;
 }
 h3 {
     font-family: 'Ms Madi', cursive;
-    font-size: clamp(28px, 3.5vw, 35px);
+    font-size: clamp(35px, 4vw, 40px);
     margin: 20px auto 30px auto;
 }
 .list {
@@ -41,7 +41,8 @@ h3 {
     flex-direction: row;
     justify-content: space-around;
     gap: 15px;
-    padding: 30px 20px 10px 20px;
+    padding: 0px 10px;
+    margin-top: 20px;
 }
 
 /* Loading Spinner __________________________________________________________________________________ */

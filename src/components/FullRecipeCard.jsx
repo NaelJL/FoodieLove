@@ -48,8 +48,8 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
         instructionsListFinal = instructionsList.map((instruction, index) => {
             return (
                 <div key={index} className="flex flex-row items-start gap-4 mb-4">
-                    <div className="bg-orange-700 font-black text-white p-3 rounded-lg mt-1">{index}</div>
-                    <div>{instruction}</div>
+                    <div className="bg-orange-950 font-black text-white p-3 rounded-lg mt-1">{index}</div>
+                    <div className="self-center">{instruction}</div>
                 </div>
             )
         })
@@ -58,31 +58,33 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
     }
 
     return (
-        <article className="m-1 sm:m-6 lg:m-10 p-6 w-full bg-white text-black rounded-lg">
+        <article className="m-4 sm:m-6 lg:m-10 p-6 w-full bg-white text-black rounded-lg">
             <button onClick={handleGoBack} className="mb-2">
                 <X color="black" />
             </button>
-            <img 
-                src={image ? image : table} 
-                alt={title} 
-                className="mx-auto w-full sm:w-6/12"
-            />
-            <h3>{title ? title : "No title"}</h3>
-            <div className="flex flex-col sm:flex-row mx-7 ">
-                <div className="bg-slate-200 rounded-lg p-3 italic inline-block"> 
-                    {ingredientsListFinal}
+            <div className="flex flex-col md:flex-row mb-8 justify-start">
+                <div className="flex flex-col">
+                    <h3>{title ? title : "No title"}</h3>
+                    <div className="mb-4 self-end md:self-start">
+                        {time && <p className="flex flex-row align-center gap-2 items-center"><Timer size={16} />{time} minutes</p>}
+                        {number && <p className="flex flex-row align-center gap-2 items-center"><Utensils size={16} />For {number} persons</p>}
+                        {vgFriendly && <p className="flex flex-row align-center gap-2 items-center"><Vegan size={16} />{vgFriendly}</p>}
+                        {glutenFree === true && <p className="flex flex-row align-center gap-2 items-center"><WheatOff size={16} />Gluten free</p>}
+                        {cheap === true && <p className="flex flex-row align-center gap-2 items-center"><Coins size={16} />Cheap</p>}
+                    </div>
                 </div>
-                <div className="ml-4 pt-3 self-end sm:self-start">
-                    {time && <p className="flex flex-row align-center gap-2 items-center"><Timer size={16} />{time} minutes</p>}
-                    {number && <p className="flex flex-row align-center gap-2 items-center"><Utensils size={16} />For {number} persons</p>}
-                    {vgFriendly && <p className="flex flex-row align-center gap-2 items-center"><Vegan size={16} />{vgFriendly}</p>}
-                    {glutenFree === true && <p className="flex flex-row align-center gap-2 items-center"><WheatOff size={16} />Gluten free</p>}
-                    {cheap === true && <p className="flex flex-row align-center gap-2 items-center"><Coins size={16} />Cheap</p>}
-                </div>
+                <img 
+                    src={image ? image : table} 
+                    alt={title} 
+                    className="mx-auto w-full md:w-6/12 md:mx-8 md:order-first"
+                />
             </div>
-            <p className="mt-4 sm:mt-12">{instructionsListFinal}</p>
+            <div className="mx-7 bg-slate-200 rounded-lg p-3 italic inline-block"> 
+                {ingredientsListFinal}
+            </div>
+            <p className="mt-8 sm:mt-12">{instructionsListFinal}</p>
             <div className="flex flex-row justify-end">
-                <a href={source} target="blank" className="text-sm font-bold text-white bg-orange-700 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">{source ? 'See the original' : ''}</a>
+                <a href={source} target="blank" className="text-sm font-bold text-white bg-orange-950 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">{source ? 'See the original' : ''}</a>
             </div>
         </article>
     )
