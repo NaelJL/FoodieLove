@@ -4,6 +4,7 @@ import { apiKey } from '../Config';
 import ImageGallery from "react-image-gallery";
 import 'react-image-gallery/styles/css/image-gallery.css';
 import LoadingSpinner from "../components/LoadingSpinner";
+import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
 export default function Home() {
 
@@ -28,7 +29,7 @@ export default function Home() {
 
     // Recipe image slider
     const recipeImages = recipes && recipes.recipes ? recipes.recipes.map(recipe => ({
-        original: recipe.image,
+        original: (recipe.image ? recipe.image : table),
         thumbnail: recipe.image,
         description: (
             <button onClick={() => handleViewRecipe(recipe.id)} className="recipe-link">
@@ -53,6 +54,7 @@ export default function Home() {
         ) : (
         // show the recipes when the request to the API is done
         <section className="list">
+            <div className="mt-4 md:mt-14 bg-white p-2">
             <ImageGallery 
                 items={recipeImages} 
                 showFullscreenButton={false} 
@@ -60,6 +62,7 @@ export default function Home() {
                 showThumbnails={false}
                 autoPlay={true}
             />
+            </div>
         </section>
         )}
         </>

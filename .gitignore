@@ -1,5 +1,6 @@
 # API key
 Config.jsx
+.env
 
 # Logs
 logs

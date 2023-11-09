@@ -7,7 +7,7 @@ import { WheatOff } from "lucide-react"
 import { Coins } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
-import table from "../assets/luisa-brimble-OayYJ8nyvfY-unsplash.jpg"
+import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
 export default function FullRecipeCard({ title, image, time, number, vegetarian, vegan, glutenFree, cheap, ingredients, instructions, source }){
 
@@ -38,7 +38,10 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
                 </ul>
         )})
     } else {
-        ingredientsListFinal = "Problem with the ingredients..."
+        ingredientsListFinal = (
+            <a href={source} target="blank" className="text-sm font-bold text-black bg-white-100 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
+                {source ? 'See the original' : ''}
+            </a>)
     }
 
     // show a list of the instructions
@@ -54,7 +57,10 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
             )
         })
     } else {
-        instructionsListFinal = "Problem with the instructions..."
+        instructionsListFinal = (
+            <a href={source} target="blank" className="text-sm font-bold text-white bg-slate-200 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
+                {source ? 'See the original' : ''}
+            </a>)
     }
 
     return (
