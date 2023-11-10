@@ -12,15 +12,13 @@ export default function SearchBar() {
         setSearchInput(e.target.value);
     };
     const ingredient = searchInput.toLowerCase();
-    
-    // Additionnal info to pass the ingredient name
-    const additionnalInfo = {
-        ingredient: ingredient,
-    }
 
     // Go to the results page when the search button is clicked
     const handleSubmit = (event) => {
         event.preventDefault();
+        const additionnalInfo = {
+            ingredient: ingredient,
+        }
         navigate(`/search/${ingredient}`, { state: additionnalInfo });
     }
 
@@ -33,7 +31,7 @@ export default function SearchBar() {
                     aria-label="Search an ingredient" 
                     value={searchInput}
                     onChange={handleInputChange}
-                    className="text-black cursor-pointer p-2 rounded-lg text-base border border-gray-300"
+                    className="text-black cursor-pointer p-2 rounded-lg text-base border border-mainBackgroundColor"
                 />
                 <button type="submit" className="ml-4">
                     <Search color="white"/>

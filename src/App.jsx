@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Recipe from './pages/FullRecipe'
 import Results from './pages/Results'
+import MainPage from './pages/MainPage'
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
         <Route path='/' element={<Home />} />
         <Route path='/recipe/:id' element={<Recipe />} />
         <Route path='/search/:id' element={<Results />} />
+        <Route path='/main/:id' element={<MainPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

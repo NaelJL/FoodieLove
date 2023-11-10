@@ -14,18 +14,18 @@ export default function RecipeCard({ id, title, image, usedIngredients = "", mis
     }
 
     return (
-        <article className="p-6 w-96 bg-white shadow-lg shadow-gray-800 text-black rounded-lg">
+        <article className="p-6 w-96 bg-articleBackground text-articleText shadow-lg shadow-gray-800 rounded-lg">
             <img
                 src={image ? image : table}  
                 alt={title}
                 className='w-full bg-cover bg-no-repeat'
             />
             <h3>{title}</h3>
-            <p className='text-left'><b>{usedIngredients}</b></p>
-            <p className='text-left'>{missedIngredients ? usedIngredients : ''}</p>
+            <p className='text-left'><b>{usedIngredients ? usedIngredients : ''}</b></p>
+            <p className='text-left'>{missedIngredients ? missedIngredients : ''}</p>
             <button 
                 onClick={handleButtonClick}
-                className="text-white bg-orange-950 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
+                className="text-mainTextColor bg-mainBackgroundColor px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
                 Show the recipe
             </button>
         </article>

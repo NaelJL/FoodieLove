@@ -1,15 +1,9 @@
-import { X } from "lucide-react"
-import { Dot } from "lucide-react"
-import { Timer } from "lucide-react"
-import { Utensils } from "lucide-react"
-import { Vegan } from "lucide-react"
-import { WheatOff } from "lucide-react"
-import { Coins } from "lucide-react"
+import { X, Dot, Timer, Utensils, Vegan, WheatOff, Coins, Instagram, Facebook } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
-export default function FullRecipeCard({ title, image, time, number, vegetarian, vegan, glutenFree, cheap, ingredients, instructions, source }){
+export default function FullRecipeCard({ id, title, image, time, number, vegetarian, vegan, glutenFree, cheap, ingredients, instructions, source }){
 
     const navigate = useNavigate();
 
@@ -39,7 +33,7 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
         )})
     } else {
         ingredientsListFinal = (
-            <a href={source} target="blank" className="text-sm font-bold text-black bg-white-100 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
+            <a href={source} target="blank" className="text-sm font-bold text-mainTextColor bg-mainBackgroundColor px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
                 {source ? 'See the original' : ''}
             </a>)
     }
@@ -51,20 +45,34 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
         instructionsListFinal = instructionsList.map((instruction, index) => {
             return (
                 <div key={index} className="flex flex-row items-start gap-4 mb-4">
-                    <div className="bg-orange-950 font-black text-white p-3 rounded-lg mt-1">{index}</div>
+                    <div className="bg-mainBackgroundColor font-black text-mainTextColor p-3 rounded-lg mt-1">{index}</div>
                     <div className="self-center">{instruction}</div>
                 </div>
             )
         })
     } else {
         instructionsListFinal = (
-            <a href={source} target="blank" className="text-sm font-bold text-white bg-slate-200 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
+            <a href={source} target="blank" className="text-sm font-bold text-mainTextColor bg-mainBackgroundColor px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">
                 {source ? 'See the original' : ''}
             </a>)
     }
 
+    // share on Pinterest
+    const shareOnPinterest = () => {
+        const recipeUrl = encodeURIComponent(`http://localhost:5173/recipe/${id}`);
+        const imageUrl = encodeURIComponent(`https://${image}`);
+      
+        window.open(`https://www.pinterest.com/pin/create/button/?url=${recipeUrl}&media=${imageUrl}`, '_blank');
+      };
+
+      // share on Facebook
+      const shareOnFacebook = () => {
+        const recipeUrl = encodeURIComponent(`http://localhost:5173/recipe/${id}`);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${recipeUrl}`, '_blank');
+      };
+
     return (
-        <article className="m-4 sm:m-6 lg:m-10 p-6 w-full bg-white text-black rounded-lg">
+        <article className="m-4 sm:m-6 lg:m-10 p-6 w-full bg-articleBackground text-articleText rounded-lg">
             <button onClick={handleGoBack} className="mb-2">
                 <X color="black" />
             </button>
@@ -85,18 +93,25 @@ export default function FullRecipeCard({ title, image, time, number, vegetarian,
                     className="mx-auto w-full md:w-6/12 md:mx-8 md:order-first"
                 />
             </div>
-            <div className="mx-7 bg-slate-200 rounded-lg p-3 italic inline-block"> 
+            <div className="mx-7 bg-secondBackgroundColor text-secondTextColor rounded-lg p-3 italic inline-block"> 
                 {ingredientsListFinal}
             </div>
             <p className="mt-8 sm:mt-12">{instructionsListFinal}</p>
-            <div className="flex flex-row justify-end">
-                <a href={source} target="blank" className="text-sm font-bold text-white bg-orange-950 px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer inline-block">{source ? 'See the original' : ''}</a>
+            <div className="flex flex-row justify-end mt-8 gap-2">
+                <button onClick={shareOnPinterest}>
+                    <Instagram />
+                </button>
+                <button onClick={shareOnFacebook}>
+                    <Facebook />
+                </button>
+                <p><a href={source} target="blank" className="text-sm font-bold text-mainTextColor bg-mainBackgroundColor px-4 py-3 rounded-2xl border-none hover:cursor-pointer inline-block">{source ? 'See the original' : ''}</a></p>
             </div>
         </article>
     )
 }
 
 FullRecipeCard.propTypes = {
+    id: PropTypes.number,
     title: PropTypes.string,
     image: PropTypes.string,
     time: PropTypes.string,

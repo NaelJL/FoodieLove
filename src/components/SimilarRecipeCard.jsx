@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiKey } from '../Config';
+import PropTypes from 'prop-types';
 import ImageGallery from "react-image-gallery";
 import 'react-image-gallery/styles/css/image-gallery.css';
 import LoadingSpinner from "../components/LoadingSpinner";
-import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg";
-import SeasonningRecipeCard from "../components/SeasoningRecipeCard";
+import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
-export default function Home() {
+export default function SimilarRecipeCard({ id }){
 
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Three random recipes to show on the home page
+    // 6 similar recipes
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const results = await fetch(`https://api.spoonacular.com/recipes/random?number=6&tags=vegetarian&apiKey=${apiKey}`);
+                const results = await fetch(`https://api.spoonacular.com/recipes/${id}/similar?number=6&apiKey=${apiKey}`);
                 const data = await results.json();
                 setRecipes(data);
                 setLoading(false);
@@ -26,7 +26,7 @@ export default function Home() {
         };
 
         fetchData();
-    }, []);
+    }, [id]);
 
     // Recipe image slider
     const recipeImages = recipes && recipes.recipes ? recipes.recipes.map(recipe => ({
@@ -53,25 +53,21 @@ export default function Home() {
         {loading ? (
             <LoadingSpinner />
         ) : (
-        // show the recipes when the request to the API is done
-        <section className="list">
-            <div className="flex flex-col">
-                <div className="mt-4 bg-white p-2">
-                <ImageGallery 
-                    items={recipeImages} 
-                    showFullscreenButton={false} 
-                    showPlayButton={false}
-                    showThumbnails={false}
-                    autoPlay={true}
-                />
-                </div>
-                <div>
-                    <h3>Seasoning recipes</h3>
-                    <SeasonningRecipeCard />
-                </div>
-            </div>
-        </section>
+            <>
+            <h3>Similar Recipes</h3>
+            <ImageGallery 
+                items={recipeImages} 
+                showFullscreenButton={false} 
+                showPlayButton={false}
+                showThumbnails={false}
+                autoPlay={true}
+            />
+            </>
         )}
         </>
     )
 }
+
+SimilarRecipeCard.propTypes = {
+    id: PropTypes.number,
+};

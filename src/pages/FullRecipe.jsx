@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { apiKey } from '../Config';
 import FullRecipeCard from "../components/FullRecipeCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import SimilarRecipeCard from "../components/SimilarRecipeCard";
 
 export default function FullRecipe(){
 
@@ -54,6 +55,10 @@ export default function FullRecipe(){
                         recipe.analyzedInstructions.map((instruction) => instruction.steps.map((step) => step.step)).flat().join('//')
                     }
                     source={recipe.sourceUrl}
+                />
+                <SimilarRecipeCard 
+                    key={recipe.id}
+                    id={recipe.id}
                 />
             </section> 
         )}

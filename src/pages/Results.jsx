@@ -21,9 +21,6 @@ export default function Results() {
                     const data = await results.json();
                     setRecipes(data);
                     setLoading(false);
-        
-                    // cache the search results in the additionnalInfo state
-                    additionnalInfo.searchResults = data;
                 } catch (error) {
                     console.log(error);
                 }
@@ -54,7 +51,7 @@ export default function Results() {
                             usedIngredients={recipe.usedIngredients.map((ingredient) => ingredient.original).join(', ')}
                             missedIngredients={recipe.missedIngredients.map((ingredient) => ingredient.original).join(', ')}
                         />)) : 
-                    <p className="text-white mt-20 md:mt-8 bg-orange-700 p-5 rounded-lg">No recipes for now</p>
+                    <p className="text-mainTextColor mt-20 md:mt-8 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
                 }
             </section>
         </div>
