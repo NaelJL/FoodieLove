@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg";
 import { useNavigate } from "react-router-dom";
+import { apiKey } from "../Config";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function SeasonningRecipeCard(){
 
-    const [recipes, setRecipes] = useState()
+    const [recipes, setRecipes] = useState([])
+    const [loading, setLoading] = useState(true)
 
     // Array of the vegetables depending of the season
     const seasons = [
@@ -13,9 +16,9 @@ export default function SeasonningRecipeCard(){
         {season: 'spring',
         vegetables: ['asparagus', 'cauliflower', 'pea', 'turnip', 'radish']},
         {season: 'summer',
-        vegetables: ['eggplant', 'zucchini', 'tomato', 'cucumber']},
+        vegetables: ['eggplant', 'zucchini', 'tomato', 'cucumber', 'salad']},
         {season: 'autumn',
-        vegetables: ['squash', 'leeks', 'cabbage']}
+        vegetables: ['squash', 'leeks', 'cabbage', 'celeriac']}
     ]
 
     // Find the current season
@@ -54,6 +57,7 @@ export default function SeasonningRecipeCard(){
                 const results = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${randomVegetable}&apiKey=${apiKey}`);
                 const data = await results.json();
                 setRecipes(data);
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }
@@ -72,21 +76,28 @@ export default function SeasonningRecipeCard(){
     }
 
     return (
-        <div className="flex flex-row gap-4 flex-wrap justify-center">
-            {recipes.length > 0 ? 
-                recipes.map((recipe) => (
-                    <article key={recipe.id} className="p-6 w-56 bg-articleBackground text-articleText rounded-lg">
-                        <img src={recipe.image ? recipe.image : table} alt={recipe.title} />
-                        <p>{recipe.title}</p> 
-                        <button 
-                            onClick={() => handleButtonClick(recipe.id)}
-                            className="text-mainTextColor bg-mainBackgroundColor px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
-                            Show the recipe
-                        </button>
-                    </article>
-                    )) : 
-                    <p className="text-mainTextColor mt-20 md:mt-8 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
-            }
-        </div>
+        <>
+        {loading ?
+            <LoadingSpinner /> :
+            (
+            <div className="flex flex-row gap-4 flex-wrap justify-center">
+                {recipes.length > 0 ? 
+                    recipes.map((recipe) => (
+                        <article key={recipe.id} className="p-6 w-56 bg-articleBackground text-articleText rounded-lg">
+                            <img src={recipe.image ? recipe.image : table} alt={recipe.title} />
+                            <p>{recipe.title}</p> 
+                            <button 
+                                onClick={() => handleButtonClick(recipe.id)}
+                                className="text-mainTextColor bg-mainBackgroundColor px-4 py-3 mt-8 rounded-2xl border-none hover:cursor-pointer">
+                                Show the recipe
+                            </button>
+                        </article>
+                        )) : 
+                        <p className="text-mainTextColor mt-20 md:mt-8 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
+                }
+            </div>
+            )
+        }
+        </>
     )
 }

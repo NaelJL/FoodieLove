@@ -60,22 +60,27 @@ export default function NavBar(){
     return (
         <nav className="bg-navStyleBackground text-navStyleText border-b-mainBackgroundColor">
             {/* Main menu */}
-            <div className="hidden sm:block sm:flex sm:flex-row p-6 bg-white gap-4 justify-center content-center">
+            <div className="hidden sm:block sm:flex sm:flex-row pt-6 bg-white gap-4 justify-center content-center">
                 {menuData.map((element) => {
                     const category = element.category;
                     return (
-                        <button onClick={() => displayMenu(category)}
-                            className={menuDisplayed === category ? 'bg-mainBackgroundColor rounded-xl text-mainTextColor p-2' : ''}
-                            key={category}>
-                            By {category}
-                        </button>
+                        <>
+                        <div className="flex flex-col relative">
+                            <button onClick={() => displayMenu(category)}
+                                key={category}
+                                className={menuDisplayed === category ? 'font-black' : ''}>
+                                By {category}
+                            </button>
+                            <div className={menuDisplayed === category ? "absolute bottom-[-12px] left-6 h-6 w-6 bg-mainBackgroundColor rounded-full text-mainBackgroundColor" : 'text-transparent bg-transparent'}>°</div>
+                        </div>
+                        </>
                 )})} 
             </div>
 
             {/* Sub menu */}
             <div className="bg-none">
                 {menuDisplayed &&
-                <div className="hidden sm:block sm:flex sm:flex-row p-2 bg-mainBackgroundColor text-mainTextColor gap-4 justify-center">
+                <div className="hidden sm:block sm:flex sm:flex-row p-4 bg-mainBackgroundColor text-mainTextColor gap-4 justify-center">
                     {menuData.find((category) => category.category === menuDisplayed)?.items.map((element) => {
                         const name = element.name
                         return (

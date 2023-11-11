@@ -2,7 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @font-face {
     font-family: 'Darling';
@@ -32,7 +31,8 @@ h1 {
     text-shadow: 2px 2px black;
 }
 h3 {
-    font-family: 'Ms Madi', cursive;
+    font-family: 'Darling', cursive;
+    letter-spacing: 3px;
     font-size: clamp(35px, 4vw, 40px);
     margin: 20px auto 30px auto;
 }

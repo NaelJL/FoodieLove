@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { apiKey } from '../Config';
 import FullRecipeCard from "../components/FullRecipeCard";
 import LoadingSpinner from "../components/LoadingSpinner";
-import SimilarRecipeCard from "../components/SimilarRecipeCard";
+import SimilarRecipe from "../components/SimilarRecipeCard";
 
 export default function FullRecipe(){
 
@@ -16,6 +16,7 @@ export default function FullRecipe(){
 
     const id = additionnalInfo.id
 
+    // get similar recipes
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -56,7 +57,7 @@ export default function FullRecipe(){
                     }
                     source={recipe.sourceUrl}
                 />
-                <SimilarRecipeCard 
+                <SimilarRecipe 
                     key={recipe.id}
                     id={recipe.id}
                 />

@@ -1,77 +1,24 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { apiKey } from '../Config';
-import ImageGallery from "react-image-gallery";
-import 'react-image-gallery/styles/css/image-gallery.css';
-import LoadingSpinner from "../components/LoadingSpinner";
-import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg";
-import SeasonningRecipeCard from "../components/SeasoningRecipeCard";
+import SeasonningRecipe from "../components/SeasoningRecipe";
+import HomeSlider from "../components/HomeSlider";
+import FastRecipes from "../components/FastRecipes";
 
 export default function Home() {
-
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // Three random recipes to show on the home page
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const results = await fetch(`https://api.spoonacular.com/recipes/random?number=6&tags=vegetarian&apiKey=${apiKey}`);
-                const data = await results.json();
-                setRecipes(data);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    // Recipe image slider
-    const recipeImages = recipes && recipes.recipes ? recipes.recipes.map(recipe => ({
-        original: (recipe.image ? recipe.image : table),
-        thumbnail: recipe.image,
-        description: (
-            <button onClick={() => handleViewRecipe(recipe.id)} className="recipe-link">
-                {recipe.title}
-            </button>
-        ),
-    })) : [];
-
-    // Go to the full recipe page
-    const navigate = useNavigate()
-    const handleViewRecipe = (specificId) => {
-        const additionnalInfo = {
-            id: specificId,
-        }
-        navigate(`/recipe/${specificId}`, { state: additionnalInfo });
-    }
-
     return (
-        <>
-        {loading ? (
-            <LoadingSpinner />
-        ) : (
-        // show the recipes when the request to the API is done
         <section className="list">
             <div className="flex flex-col">
-                <div className="mt-4 bg-white p-2">
-                <ImageGallery 
-                    items={recipeImages} 
-                    showFullscreenButton={false} 
-                    showPlayButton={false}
-                    showThumbnails={false}
-                    autoPlay={true}
-                />
-                </div>
                 <div>
                     <h3>Seasoning recipes</h3>
-                    <SeasonningRecipeCard />
+                    <SeasonningRecipe />
+                </div>
+                <div>
+                    <h3>Needing an idea ?</h3>
+                    <HomeSlider />
+                </div>
+                <div>
+                    <h3>Under 20 minutes recipes</h3>
+                    <FastRecipes />
                 </div>
             </div>
         </section>
-        )}
-        </>
     )
 }

@@ -4,7 +4,7 @@ import { apiKey } from '../Config';
 import PropTypes from 'prop-types';
 import ImageGallery from "react-image-gallery";
 import 'react-image-gallery/styles/css/image-gallery.css';
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "./LoadingSpinner";
 import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
 export default function SimilarRecipeCard({ id }){
