@@ -1,5 +1,5 @@
-import SeasonningRecipe from "../components/SeasoningRecipe";
-import HomeSlider from "../components/HomeSlider";
+import SeasonalRecipes from "../components/SeasonalRecipes";
+import TimeDependentRecipes from "../components/TimeDependentRecipes";
 import FastRecipes from "../components/FastRecipes";
 
 export default function Home() {
@@ -7,15 +7,15 @@ export default function Home() {
         <section className="list">
             <div className="flex flex-col">
                 <div>
-                    <h3>Seasoning recipes</h3>
-                    <SeasonningRecipe />
+                    <h3 className="text-center">Seasonal recipes</h3>
+                    <SeasonalRecipes />
                 </div>
                 <div>
-                    <h3>Needing an idea ?</h3>
-                    <HomeSlider />
+                    <h3 className="text-center">Need an idea ?</h3>
+                    <TimeDependentRecipes />
                 </div>
                 <div>
-                    <h3>Under 20 minutes recipes</h3>
+                    <h3 className="text-center">Under 20 minutes recipes</h3>
                     <FastRecipes />
                 </div>
             </div>

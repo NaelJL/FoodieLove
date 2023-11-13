@@ -1,12 +1,28 @@
 import UseFetchRecipes from "./UseFetchRecipes";
 import LoadingSpinner from "./LoadingSpinner";
-import RecipeCard from './RecipeCard'
+import RecipeCard from './RecipeCard';
 
-export default function FastRecipes(){
-    
-    const apiEndpoint = 'complexSearch?maxReadyTime=20';
+export default function TimeDependentRecipes(){
+
+    // Recipes depending on the hour of the day
+    const currentTime = new Date()
+    const currentHour = currentTime.toLocaleTimeString()
+    let recipe = ''
+    if (currentHour >= 6 && currentHour <= 10){
+        recipe = 'breakfast'
+    } else if (currentHour >= 11 && currentHour <= 13){
+        recipe = 'main-course'
+    } else if (currentHour >= 14 && currentHour <= 17){
+        recipe = 'snack'
+    } else if (currentHour >= 18 && currentHour <= 20){
+        recipe = 'main-course'
+    } else if (currentHour >= 21 && currentHour <= 5) {
+        recipe = 'finger-food'
+    }
+
+    const apiEndpoint = `complexSearch?type=${recipe}`;
     const { recipes, loading } = UseFetchRecipes({ apiEndpoint: apiEndpoint });
-console.log(loading);
+    
     return (
         <>
         {loading ?
@@ -23,8 +39,8 @@ console.log(loading);
                                 image={recipe.image}
                                 title={recipe.title}
                             />
-                            ))
-                        : <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
+                            )) : 
+                        <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
                 : <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
                 }
             </div>

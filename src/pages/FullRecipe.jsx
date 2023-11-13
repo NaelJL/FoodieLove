@@ -1,36 +1,17 @@
-import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { apiKey } from '../Config';
-import FullRecipeCard from "../components/FullRecipeCard";
+import UseFetchRecipes from "../components/UseFetchRecipes";
 import LoadingSpinner from "../components/LoadingSpinner";
-import SimilarRecipe from "../components/SimilarRecipeCard";
+import FullRecipeCard from "../components/FullRecipeCard";
+import SimilarRecipes from "../components/SimilarRecipes";
 
 export default function FullRecipe(){
-
-    const [recipe, setRecipe] = useState('')
-    const [loading, setLoading] = useState(true)
 
     // catch the sended informations
     const location = useLocation()
     const additionnalInfo = location.state
-
-    const id = additionnalInfo.id
-
-    // get similar recipes
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const api = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`
-                const results = await fetch(api);
-                const data = await results.json();
-                setRecipe(data);
-                setLoading(false)
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
-    }, [id]);
+    
+    const apiEndpoint = `${additionnalInfo.id}/information?includeNutrition=false`;
+    const { recipes, loading } = UseFetchRecipes({ apiEndpoint: apiEndpoint });
 
     return (
         <>  
@@ -39,27 +20,31 @@ export default function FullRecipe(){
             ) : (
             <section className="list">
                 <FullRecipeCard 
-                    key={recipe.id}
-                    id={recipe.id}
-                    title={recipe.title}
-                    image={recipe.image}
-                    time={recipe.readyInMinutes == 'null' ? 'unknown' : recipe.readyInMinutes }
-                    number={recipe.servings == 'null' ? 'unknown' : recipe.servings }
-                    vegetarian={recipe.vegetarian == 'null' ? 'unknown' : recipe.vegetarian }
-                    vegan={recipe.vegan == 'null' ? 'unknown' : recipe.vegan }
-                    glutenFree={recipe.glutenFree == 'null' ? 'unknown' : recipe.glutenFree }
-                    cheap={recipe.cheap == 'null' ? 'unknown' : recipe.cheap }
-                    ingredients={recipe.extendedIngredients === 0 ? 'null' :
-                        recipe.extendedIngredients.map((ingredient) => ingredient.original).join('//')
+                    key={recipes.id}
+                    id={recipes.id}
+                    title={recipes.title}
+                    image={recipes.image}
+                    time={recipes.readyInMinutes == 'null' ? 'unknown' : recipes.readyInMinutes }
+                    number={recipes.servings == 'null' ? 'unknown' : recipes.servings }
+                    vegetarian={recipes.vegetarian == 'null' ? 'unknown' : recipes.vegetarian }
+                    vegan={recipes.vegan == 'null' ? 'unknown' : recipes.vegan }
+                    glutenFree={recipes.glutenFree == 'null' ? 'unknown' : recipes.glutenFree }
+                    cheap={recipes.cheap == 'null' ? 'unknown' : recipes.cheap }
+                    ingredients={recipes.extendedIngredients === 0 ? 'null' :
+                        recipes.extendedIngredients.map((ingredient) => ingredient.original).join('//')
                     }
-                    instructions={recipe.analyzedInstructions.length === 0 ? 'null' :
-                        recipe.analyzedInstructions.map((instruction) => instruction.steps.map((step) => step.step)).flat().join('//')
+                    instructions={recipes.analyzedInstructions.length === 0 ? 'null' :
+                        recipes.analyzedInstructions.map((instruction) => instruction.steps.map((step) => step.step)).flat().join('//')
                     }
-                    source={recipe.sourceUrl}
+                    source={recipes.sourceUrl}
                 />
-                <SimilarRecipe 
-                    key={recipe.id}
-                    id={recipe.id}
+                <SimilarRecipes
+                    key={recipes.id}
+                    id={recipes.id}
+                    vegetarian={recipes.vegetarian == 'null' ? 'unknown' : recipes.vegetarian }
+                    ingredients={recipes.extendedIngredients === 0 ? 'null' :
+                        recipes.extendedIngredients.map((ingredient) => ingredient.original).join('//')
+                    }
                 />
             </section> 
         )}

@@ -5,9 +5,8 @@ import table from "../assets/brooke-lark-3TwtvW1vDCw-unsplash.jpg"
 
 export default function FullRecipeCard({ id, title, image, time, number, vegetarian, vegan, glutenFree, cheap, ingredients, instructions, source }){
 
+    // go back to the previous page
     const navigate = useNavigate();
-
-    // go back to the search page
     const handleGoBack = () => {
         navigate(-1)
     }
@@ -71,6 +70,7 @@ export default function FullRecipeCard({ id, title, image, time, number, vegetar
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${recipeUrl}`, '_blank');
       };
 
+      
     return (
         <article className="m-4 sm:m-6 lg:m-10 p-6 w-full bg-articleBackground text-articleText rounded-lg">
             <button onClick={handleGoBack} className="mb-2">
@@ -81,7 +81,7 @@ export default function FullRecipeCard({ id, title, image, time, number, vegetar
                     <h3>{title ? title : "No title"}</h3>
                     <div className="mb-4 self-end md:self-start">
                         {time && <p className="flex flex-row align-center gap-2 items-center"><Timer size={16} />{time} minutes</p>}
-                        {number && <p className="flex flex-row align-center gap-2 items-center"><Utensils size={16} />For {number} persons</p>}
+                        {number && <p className="flex flex-row align-center gap-2 items-center"><Utensils size={16} />For {number} person(s)</p>}
                         {vgFriendly && <p className="flex flex-row align-center gap-2 items-center"><Vegan size={16} />{vgFriendly}</p>}
                         {glutenFree === true && <p className="flex flex-row align-center gap-2 items-center"><WheatOff size={16} />Gluten free</p>}
                         {cheap === true && <p className="flex flex-row align-center gap-2 items-center"><Coins size={16} />Cheap</p>}

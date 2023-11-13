@@ -46,6 +46,77 @@ h3 {
     margin-top: 20px;
 }
 
+/* Navbar ___________________________________________________________________________________________ */
+.burger-icon {
+    display: none;
+}
+.menu-container {
+    display: flex;
+    flex-direction: column;
+}
+.main-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 50px;
+}
+.main-menu-mobile {
+    display: none;
+}
+.sub-menu {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    justify-content: center;
+    gap: 16px;
+    background-color: rgb(62,23,11);
+    color: white;
+    height: 55px;
+}
+.sub-menu-mobile {
+    display: none;
+}
+@media only screen and (max-width: 640px) {
+    .burger-icon {
+        display: block;
+        padding: 8px;
+    }
+    .menu-container {
+        flex-direction: row;
+        height: 100%;
+    }
+    .main-menu {
+        display: none;
+    }
+    .main-menu-mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 20px;
+        padding: 20px;
+        width: 30%;
+    }
+    .sub-menu {
+        display: none;
+    }
+    .sub-menu-mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        width: 70%;
+        background-color: rgb(62,23,11);
+        color: white;
+        z-index: 3;
+    }
+}
+
 /* Loading Spinner __________________________________________________________________________________ */
 .loader {
     display: block;

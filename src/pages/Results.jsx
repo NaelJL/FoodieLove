@@ -1,32 +1,17 @@
-import { useState, useEffect } from "react"
 import { NavLink, useLocation } from "react-router-dom";
-import { apiKey } from '../Config';
 import { Undo2 } from "lucide-react";
-import RecipeCard from "../components/RecipeCard";
+import UseFetchRecipes from "../components/UseFetchRecipes";
 import LoadingSpinner from "../components/LoadingSpinner";
+import RecipeCard from "../components/RecipeCard";
 
 export default function Results() {
-
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(true)
 
     // catch the sended informations
     const location = useLocation()
     const additionnalInfo = location.state
 
-    useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const results = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${additionnalInfo.ingredient}&apiKey=${apiKey}`);
-                    const data = await results.json();
-                    setRecipes(data);
-                    setLoading(false);
-                } catch (error) {
-                    console.log(error);
-                }
-            };
-            fetchData()
-    }, [additionnalInfo]);
+    const apiEndpoint = `findByIngredients?ingredients=${additionnalInfo.ingredient}`;
+    const { recipes, loading } = UseFetchRecipes({ apiEndpoint: apiEndpoint });
 
     return (
         <>
@@ -51,7 +36,7 @@ export default function Results() {
                             usedIngredients={recipe.usedIngredients.map((ingredient) => ingredient.original).join(', ')}
                             missedIngredients={recipe.missedIngredients.map((ingredient) => ingredient.original).join(', ')}
                         />)) : 
-                    <p className="text-mainTextColor mt-20 md:mt-8 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
+                    <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
                 }
             </section>
         </div>
