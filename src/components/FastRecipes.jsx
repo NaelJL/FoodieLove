@@ -6,7 +6,7 @@ export default function FastRecipes(){
     
     const apiEndpoint = 'complexSearch?maxReadyTime=20';
     const { recipes, loading } = UseFetchRecipes({ apiEndpoint: apiEndpoint });
-console.log(loading);
+
     return (
         <>
         {loading ?

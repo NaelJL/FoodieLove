@@ -3,23 +3,17 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from "./LoadingSpinner";
 import RecipeCard from "./RecipeCard";
 
-export default function SimilarRecipes({ vegetarian, ingredients }){
+export default function SimilarRecipes({ ingredients }){
 
-    // if vegetarian is true, search vegetarian recipes, else search recipes with a similar ingredient
-    let similarity = ''
-    if (vegetarian !== 'unknown') {
-        similarity = "complexSearch?diet=vegetarian"
-    } else if (ingredients !== 'null' ) {
-        const ingredientsList = ingredients.split('//')
-        const getRandomIngredient = () => {
-            const randomIndex = Math.floor(Math.random() * ingredientsList.length);
-            return ingredientsList[randomIndex];
-        }
-        const randomIngredient = getRandomIngredient();
-        similarity = `findByIngredients=${randomIngredient}`
+    // search recipes with a similar ingredient
+    const ingredientsList = ingredients.split('//')
+    const getRandomIngredient = () => {
+        const randomIndex = Math.floor(Math.random() * ingredientsList.length);
+        return ingredientsList[randomIndex];
     }
+    const randomIngredient = getRandomIngredient();
 
-    const apiEndpoint = similarity;
+    const apiEndpoint = `findByIngredients=${randomIngredient}`;
     const { recipes, loading } = UseFetchRecipes({ apiEndpoint: apiEndpoint });
     
     return (

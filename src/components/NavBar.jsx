@@ -90,7 +90,7 @@ export default function NavBar(){
             )}
             {/* Sub menu on mobile */}
             {menuDisplayed && burgerMenuVisible &&
-                <div className="sub-menu-mobile">
+                <div className='sub-menu-mobile'>
                     {menuData.find((category) => category.category === menuDisplayed)?.items.map((element) => {
                         const name = element.name
                         return (

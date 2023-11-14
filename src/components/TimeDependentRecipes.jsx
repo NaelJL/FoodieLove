@@ -6,7 +6,8 @@ export default function TimeDependentRecipes(){
 
     // Recipes depending on the hour of the day
     const currentTime = new Date()
-    const currentHour = currentTime.toLocaleTimeString()
+    var currentTimeString = currentTime.toLocaleTimeString();
+    const currentHour = parseInt(currentTimeString.split(':')[0], 10);
     let recipe = ''
     if (currentHour >= 6 && currentHour <= 10){
         recipe = 'breakfast'
