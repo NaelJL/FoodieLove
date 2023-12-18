@@ -53,7 +53,7 @@ export default function SeasonalRecipes(){
             (
                 <LoadingSpinner />
             ) : (
-            <div className="flex flex-row gap-4 flex-wrap justify-center">
+            <div className="flex flex-row gap-4 flex-nowrap w-full">
                 {recipes.length > 0 ? 
                     recipes.map((recipe) => (
                         <RecipeCard 

@@ -9,7 +9,7 @@ export default function UseFetchRecipes ({ apiEndpoint }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://api.spoonacular.com/recipes/${apiEndpoint}?apiKey=${apiKey}`);
+        const response = await fetch(`https://api.spoonacular.com/recipes/${apiEndpoint}&apiKey=${apiKey}`);
         const results = await response.json();
         setRecipes(results);
         setLoading(false);

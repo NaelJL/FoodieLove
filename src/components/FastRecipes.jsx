@@ -13,18 +13,16 @@ export default function FastRecipes(){
             (
                 <LoadingSpinner />
             ) : (
-                <div className="flex flex-row gap-4 flex-wrap justify-center">
-                {recipes.results !== undefined ?
-                    recipes.results.length > 0 ? 
-                        recipes.results.map((recipe) => (
-                            <RecipeCard 
-                                key={recipe.id}
-                                id={recipe.id}
-                                image={recipe.image}
-                                title={recipe.title}
-                            />
-                            ))
-                        : <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
+                <div className="flex flex-row gap-4 flex-nowrap w-full">
+                {recipes.results !== undefined & recipes.results.length > 0 ? 
+                    recipes.results.map((recipe) => (    
+                        <RecipeCard 
+                            key={recipe.id}
+                            id={recipe.id}
+                            image={recipe.image}
+                            title={recipe.title}
+                        />
+                        ))
                 : <p className="text-mainTextColor mb-5 bg-mainBackgroundColor p-5 rounded-lg">No recipes for now</p>
                 }
             </div>

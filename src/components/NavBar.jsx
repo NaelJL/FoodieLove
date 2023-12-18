@@ -102,7 +102,7 @@ export default function NavBar(){
                 )})}
                 </div>}
 
-            {/* Main menu on other screens*/}
+            {/* Main menu on other screens */}
             <div className="main-menu">
                 {menuData.map((element) => {
                     const category = element.category;
